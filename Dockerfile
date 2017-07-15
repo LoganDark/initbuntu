@@ -1,4 +1,5 @@
 FROM library/ubuntu:latest
+LABEL maintainer "logandarklock@gmail.com"
 
 ENV container docker
 STOPSIGNAL SIGRTMIN+3
