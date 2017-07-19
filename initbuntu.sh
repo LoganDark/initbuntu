@@ -34,8 +34,6 @@ if read -n 1 -p '' -s -t 10; then
 
     select1=true
     while [[ "$select1" = true ]]; do
-        select1=false
-        
         select choice in "$systemdchoice" "$shellchoice" "$exitchoice"; do
             select1=true
             
@@ -45,8 +43,6 @@ if read -n 1 -p '' -s -t 10; then
                 select2=true
                 
                 while [[ "$select2" = true ]]; do
-                    select2=false
-                    
                     color '
 Choose a shell to run.
 '
@@ -77,25 +73,35 @@ Path: '
                                 fi
                             done
                         else
+                            printf '
+'
                             $shell
+                            break 2
                         fi
                     done
+
+                    select2=false
                 done
 
                 color '
 Exiting.
+
 '
             else
                 color '
 Exiting.
+
 '
                 exit
             fi
         done
+
+        select1=false
     done
 
     color '
 Exiting.
+
 '
     exit
 else
