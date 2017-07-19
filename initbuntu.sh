@@ -1,6 +1,7 @@
 #!/bin/bash
 
-containerid="$(hostname)" # for now
+containerid="$(grep '/docker/' /proc/self/cgroup | tail -c 65 | head -c 64)"
+readableid="$(echo -n \"$containerid\" | head -c 12)"
 startsystemd='/bin/systemd --system --unit=basic.target'
 
 systemdchoice='Continue with boot (start systemd)'
@@ -17,15 +18,17 @@ color() {
 
 color 'Welcome to initbuntu!
 
-Run "docker exec -it %s bash" to obtain shell access to this container.
+Run "docker exec -it %s bash" to obtain shell access to this container after systemd has been started.
 
-Use "docker stop %s" to stop this container, or press ^P-^Q to detach from this container (leaving it running).
+Use "docker stop %s" to stop this container, or press ^P-^Q to detach from this container and let it run in the background.
+
+Since stopping may take a while, "docker kill %s" will be faster.
 
 \e[1mIF SYSTEMD COMPLAINS ABOUT CGROUP\e[22m, add \e[1m-v /sys/fs/cgroup:/sys/fs/cgroup:ro\e[22m as a flag, and systemd should stop complaining.
 
 However, some systems are not capable of running this container. This cannot be prevented. Docker does not virtualize the whole system, so there will be incompatibilities.
 
-Press any key for additional options, or wait 10 seconds to ignore' "$containerid" "$containerid"
+Press any key for additional options, or wait 10 seconds to ignore' "$readableid" "$readableid" "$readableid"
 
 if read -n 1 -p '' -s -t 10; then
     printf '
