@@ -14,4 +14,4 @@ This command works best for starting the image:
 Notice
 ------
 
-Docker does not virtualize the kernel. This means that if your kernel does not support systemd, it will not start. This is a known issue with slackware+initbuntu and cannot be fixed.
+Docker does not virtualize the kernel. This means that if your kernel does not support systemd, initbuntu will not start. This is a known issue with slackware+initbuntu and cannot be fixed.
