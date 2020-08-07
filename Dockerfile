@@ -1,4 +1,4 @@
-FROM library/ubuntu:latest
+FROM library/ubuntu:16.04
 LABEL maintainer "logandarklock@gmail.com"
 
 ENV container docker
